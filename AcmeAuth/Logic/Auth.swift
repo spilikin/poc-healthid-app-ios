@@ -8,6 +8,7 @@ import JOSESwift
 
 enum AuthError: Error {
     case serverError
+    case clientError(reason: String)
     case localSignatureError
 }
 
@@ -106,7 +107,12 @@ class AuthManager {
             .flatMap { request in
                 return URLSession.shared.dataTaskPublisher(for: request)
                     .mapError { $0 as Error}
-                    .map { $0.data }
+                    .tryMap { output in
+                        guard let response = output.response as? HTTPURLResponse, response.statusCode == 200 else {
+                            throw AuthError.clientError(reason: String(decoding: output.data, as: UTF8.self))
+                        }
+                        return output.data
+                    }
             }
             .eraseToAnyPublisher()
         
