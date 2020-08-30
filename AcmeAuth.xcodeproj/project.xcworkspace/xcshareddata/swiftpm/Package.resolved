@@ -1,0 +1,79 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ASN1Kit",
+        "repositoryURL": "https://github.com/spilikin/ASN1Kit.git",
+        "state": {
+          "branch": null,
+          "revision": "842fb8503d715247cf15d51c9969b55e999482c4",
+          "version": "1.0.8"
+        }
+      },
+      {
+        "package": "BigInt",
+        "repositoryURL": "http://github.com/attaswift/BigInt",
+        "state": {
+          "branch": null,
+          "revision": "2bbb8a7addeb79ceccf45acac9f6e2a07cbe9680",
+          "version": "5.1.0"
+        }
+      },
+      {
+        "package": "CodeScanner",
+        "repositoryURL": "https://github.com/twostraws/CodeScanner",
+        "state": {
+          "branch": null,
+          "revision": "9d902dec616bd70b1a2a1b1e6d821c10c392ba9f",
+          "version": "1.0.6"
+        }
+      },
+      {
+        "package": "DataKit",
+        "repositoryURL": "http://github.com/SwiftCommon/DataKit",
+        "state": {
+          "branch": null,
+          "revision": "0aca955ad82c44c5a1668916d95538f90f2b7e43",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "JOSESwift",
+        "repositoryURL": "https://github.com/airsidemobile/JOSESwift.git",
+        "state": {
+          "branch": null,
+          "revision": "b5d78b872dc9a7bcf29e9a6bb2d70b5bf51ebd3c",
+          "version": "2.2.1"
+        }
+      },
+      {
+        "package": "Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble",
+        "state": {
+          "branch": null,
+          "revision": "2b1809051b4a65c1d7f5233331daa24572cd7fca",
+          "version": "8.1.1"
+        }
+      },
+      {
+        "package": "GemCommonsKit",
+        "repositoryURL": "https://github.com/spilikin/ref-GemCommonsKit.git",
+        "state": {
+          "branch": null,
+          "revision": "ca6747f7fe816d77fcba5ad39f8cf0ab4411b1c0",
+          "version": "1.1.1"
+        }
+      },
+      {
+        "package": "OpenHealthCardKit",
+        "repositoryURL": "https://github.com/spilikin/ref-OpenHealthCardKit.git",
+        "state": {
+          "branch": null,
+          "revision": "9ca1c54e261891daa79ef81c59332d0d2214bea9",
+          "version": "2.0.10"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

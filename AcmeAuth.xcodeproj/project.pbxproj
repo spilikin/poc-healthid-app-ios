@@ -1,0 +1,718 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D540791A24EC2BE500635053 /* EnrollmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540791924EC2BE500635053 /* EnrollmentView.swift */; };
+		D540791D24EC428F00635053 /* JOSESwift in Frameworks */ = {isa = PBXBuildFile; productRef = D540791C24EC428F00635053 /* JOSESwift */; };
+		D540791F24ED726000635053 /* KeyManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540791E24ED726000635053 /* KeyManagement.swift */; };
+		D59944D124B4CD10001723C5 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = D59944D024B4CD10001723C5 /* CodeScanner */; };
+		D5AC63A824DEA8D800B2A7D5 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63A724DEA8D800B2A7D5 /* AuthView.swift */; };
+		D5AC63AA24DFD2B100B2A7D5 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63A924DFD2B100B2A7D5 /* Auth.swift */; };
+		D5AC63AE24DFF80600B2A7D5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63AD24DFF80600B2A7D5 /* Settings.swift */; };
+		D5AC63B024E9641C00B2A7D5 /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63AF24E9641C00B2A7D5 /* Enrollment.swift */; };
+		D5B9B1BE24F29CD400F94963 /* Smartcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B9B1BD24F29CD400F94963 /* Smartcard.swift */; };
+		D5CC08E124B1FF5A00186DE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC08E024B1FF5A00186DE1 /* AppDelegate.swift */; };
+		D5CC08E324B1FF5A00186DE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC08E224B1FF5A00186DE1 /* SceneDelegate.swift */; };
+		D5CC08E524B1FF5A00186DE1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC08E424B1FF5A00186DE1 /* HomeView.swift */; };
+		D5CC08E724B1FF5C00186DE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5CC08E624B1FF5C00186DE1 /* Assets.xcassets */; };
+		D5CC08EA24B1FF5C00186DE1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5CC08E924B1FF5C00186DE1 /* Preview Assets.xcassets */; };
+		D5CC08ED24B1FF5C00186DE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5CC08EB24B1FF5C00186DE1 /* LaunchScreen.storyboard */; };
+		D5CC08F824B1FF5C00186DE1 /* AcmeAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC08F724B1FF5C00186DE1 /* AcmeAuthTests.swift */; };
+		D5CC090324B1FF5C00186DE1 /* AcmeAuthUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC090224B1FF5C00186DE1 /* AcmeAuthUITests.swift */; };
+		D5CC091224B21FBA00186DE1 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC091124B21FBA00186DE1 /* AppState.swift */; };
+		D5CC091424B37C7300186DE1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC091324B37C7300186DE1 /* SettingsView.swift */; };
+		D5CC091724B3807300186DE1 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC091624B3807300186DE1 /* ScannerView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D5CC08F424B1FF5C00186DE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5CC08D524B1FF5A00186DE1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5CC08DC24B1FF5A00186DE1;
+			remoteInfo = AcmeAuth;
+		};
+		D5CC08FF24B1FF5C00186DE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5CC08D524B1FF5A00186DE1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5CC08DC24B1FF5A00186DE1;
+			remoteInfo = AcmeAuth;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D540791924EC2BE500635053 /* EnrollmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentView.swift; sourceTree = "<group>"; };
+		D540791E24ED726000635053 /* KeyManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManagement.swift; sourceTree = "<group>"; };
+		D5AC63A724DEA8D800B2A7D5 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		D5AC63A924DFD2B100B2A7D5 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		D5AC63AD24DFF80600B2A7D5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D5AC63AF24E9641C00B2A7D5 /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
+		D5B9B1BD24F29CD400F94963 /* Smartcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Smartcard.swift; sourceTree = "<group>"; };
+		D5CC08DD24B1FF5A00186DE1 /* AcmeAuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcmeAuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5CC08E024B1FF5A00186DE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D5CC08E224B1FF5A00186DE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		D5CC08E424B1FF5A00186DE1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D5CC08E624B1FF5C00186DE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D5CC08E924B1FF5C00186DE1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D5CC08EC24B1FF5C00186DE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D5CC08EE24B1FF5C00186DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5CC08F324B1FF5C00186DE1 /* AcmeAuthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcmeAuthTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5CC08F724B1FF5C00186DE1 /* AcmeAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcmeAuthTests.swift; sourceTree = "<group>"; };
+		D5CC08F924B1FF5C00186DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5CC08FE24B1FF5C00186DE1 /* AcmeAuthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcmeAuthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5CC090224B1FF5C00186DE1 /* AcmeAuthUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcmeAuthUITests.swift; sourceTree = "<group>"; };
+		D5CC090424B1FF5C00186DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5CC091024B218A200186DE1 /* AcmeAuth.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AcmeAuth.entitlements; sourceTree = "<group>"; };
+		D5CC091124B21FBA00186DE1 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D5CC091324B37C7300186DE1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D5CC091624B3807300186DE1 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D5CC08DA24B1FF5A00186DE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D59944D124B4CD10001723C5 /* CodeScanner in Frameworks */,
+				D540791D24EC428F00635053 /* JOSESwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5CC08F024B1FF5C00186DE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5CC08FB24B1FF5C00186DE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D57E1C7324B641A100591721 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				D5AC63AD24DFF80600B2A7D5 /* Settings.swift */,
+				D5CC091124B21FBA00186DE1 /* AppState.swift */,
+				D5AC63A924DFD2B100B2A7D5 /* Auth.swift */,
+				D5AC63AF24E9641C00B2A7D5 /* Enrollment.swift */,
+				D540791E24ED726000635053 /* KeyManagement.swift */,
+				D5B9B1BD24F29CD400F94963 /* Smartcard.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		D5CC08D424B1FF5A00186DE1 = {
+			isa = PBXGroup;
+			children = (
+				D5CC08DF24B1FF5A00186DE1 /* AcmeAuth */,
+				D5CC08F624B1FF5C00186DE1 /* AcmeAuthTests */,
+				D5CC090124B1FF5C00186DE1 /* AcmeAuthUITests */,
+				D5CC08DE24B1FF5A00186DE1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D5CC08DE24B1FF5A00186DE1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D5CC08DD24B1FF5A00186DE1 /* AcmeAuth.app */,
+				D5CC08F324B1FF5C00186DE1 /* AcmeAuthTests.xctest */,
+				D5CC08FE24B1FF5C00186DE1 /* AcmeAuthUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D5CC08DF24B1FF5A00186DE1 /* AcmeAuth */ = {
+			isa = PBXGroup;
+			children = (
+				D57E1C7324B641A100591721 /* Logic */,
+				D5CC091524B37CDD00186DE1 /* Views */,
+				D5CC091024B218A200186DE1 /* AcmeAuth.entitlements */,
+				D5CC08E024B1FF5A00186DE1 /* AppDelegate.swift */,
+				D5CC08E224B1FF5A00186DE1 /* SceneDelegate.swift */,
+				D5CC08E624B1FF5C00186DE1 /* Assets.xcassets */,
+				D5CC08EB24B1FF5C00186DE1 /* LaunchScreen.storyboard */,
+				D5CC08EE24B1FF5C00186DE1 /* Info.plist */,
+				D5CC08E824B1FF5C00186DE1 /* Preview Content */,
+			);
+			path = AcmeAuth;
+			sourceTree = "<group>";
+		};
+		D5CC08E824B1FF5C00186DE1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D5CC08E924B1FF5C00186DE1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D5CC08F624B1FF5C00186DE1 /* AcmeAuthTests */ = {
+			isa = PBXGroup;
+			children = (
+				D5CC08F724B1FF5C00186DE1 /* AcmeAuthTests.swift */,
+				D5CC08F924B1FF5C00186DE1 /* Info.plist */,
+			);
+			path = AcmeAuthTests;
+			sourceTree = "<group>";
+		};
+		D5CC090124B1FF5C00186DE1 /* AcmeAuthUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D5CC090224B1FF5C00186DE1 /* AcmeAuthUITests.swift */,
+				D5CC090424B1FF5C00186DE1 /* Info.plist */,
+			);
+			path = AcmeAuthUITests;
+			sourceTree = "<group>";
+		};
+		D5CC091524B37CDD00186DE1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D5CC091324B37C7300186DE1 /* SettingsView.swift */,
+				D5CC08E424B1FF5A00186DE1 /* HomeView.swift */,
+				D5CC091624B3807300186DE1 /* ScannerView.swift */,
+				D5AC63A724DEA8D800B2A7D5 /* AuthView.swift */,
+				D540791924EC2BE500635053 /* EnrollmentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D5CC08DC24B1FF5A00186DE1 /* AcmeAuth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5CC090724B1FF5C00186DE1 /* Build configuration list for PBXNativeTarget "AcmeAuth" */;
+			buildPhases = (
+				D5CC08D924B1FF5A00186DE1 /* Sources */,
+				D5CC08DA24B1FF5A00186DE1 /* Frameworks */,
+				D5CC08DB24B1FF5A00186DE1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AcmeAuth;
+			packageProductDependencies = (
+				D59944D024B4CD10001723C5 /* CodeScanner */,
+				D540791C24EC428F00635053 /* JOSESwift */,
+			);
+			productName = AcmeAuth;
+			productReference = D5CC08DD24B1FF5A00186DE1 /* AcmeAuth.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D5CC08F224B1FF5C00186DE1 /* AcmeAuthTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5CC090A24B1FF5C00186DE1 /* Build configuration list for PBXNativeTarget "AcmeAuthTests" */;
+			buildPhases = (
+				D5CC08EF24B1FF5C00186DE1 /* Sources */,
+				D5CC08F024B1FF5C00186DE1 /* Frameworks */,
+				D5CC08F124B1FF5C00186DE1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5CC08F524B1FF5C00186DE1 /* PBXTargetDependency */,
+			);
+			name = AcmeAuthTests;
+			productName = AcmeAuthTests;
+			productReference = D5CC08F324B1FF5C00186DE1 /* AcmeAuthTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D5CC08FD24B1FF5C00186DE1 /* AcmeAuthUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5CC090D24B1FF5C00186DE1 /* Build configuration list for PBXNativeTarget "AcmeAuthUITests" */;
+			buildPhases = (
+				D5CC08FA24B1FF5C00186DE1 /* Sources */,
+				D5CC08FB24B1FF5C00186DE1 /* Frameworks */,
+				D5CC08FC24B1FF5C00186DE1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5CC090024B1FF5C00186DE1 /* PBXTargetDependency */,
+			);
+			name = AcmeAuthUITests;
+			productName = AcmeAuthUITests;
+			productReference = D5CC08FE24B1FF5C00186DE1 /* AcmeAuthUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D5CC08D524B1FF5A00186DE1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = spilikin;
+				TargetAttributes = {
+					D5CC08DC24B1FF5A00186DE1 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					D5CC08F224B1FF5C00186DE1 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = D5CC08DC24B1FF5A00186DE1;
+					};
+					D5CC08FD24B1FF5C00186DE1 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = D5CC08DC24B1FF5A00186DE1;
+					};
+				};
+			};
+			buildConfigurationList = D5CC08D824B1FF5A00186DE1 /* Build configuration list for PBXProject "AcmeAuth" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D5CC08D424B1FF5A00186DE1;
+			packageReferences = (
+				D59944CF24B4CD10001723C5 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				D540791B24EC428F00635053 /* XCRemoteSwiftPackageReference "JOSESwift" */,
+				D59880A724F6D5B90087C57F /* XCRemoteSwiftPackageReference "ref-OpenHealthCardKit" */,
+			);
+			productRefGroup = D5CC08DE24B1FF5A00186DE1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D5CC08DC24B1FF5A00186DE1 /* AcmeAuth */,
+				D5CC08F224B1FF5C00186DE1 /* AcmeAuthTests */,
+				D5CC08FD24B1FF5C00186DE1 /* AcmeAuthUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D5CC08DB24B1FF5A00186DE1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5CC08ED24B1FF5C00186DE1 /* LaunchScreen.storyboard in Resources */,
+				D5CC08EA24B1FF5C00186DE1 /* Preview Assets.xcassets in Resources */,
+				D5CC08E724B1FF5C00186DE1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5CC08F124B1FF5C00186DE1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5CC08FC24B1FF5C00186DE1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D5CC08D924B1FF5A00186DE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5CC08E124B1FF5A00186DE1 /* AppDelegate.swift in Sources */,
+				D540791F24ED726000635053 /* KeyManagement.swift in Sources */,
+				D5CC08E324B1FF5A00186DE1 /* SceneDelegate.swift in Sources */,
+				D5CC08E524B1FF5A00186DE1 /* HomeView.swift in Sources */,
+				D5CC091724B3807300186DE1 /* ScannerView.swift in Sources */,
+				D5AC63AE24DFF80600B2A7D5 /* Settings.swift in Sources */,
+				D540791A24EC2BE500635053 /* EnrollmentView.swift in Sources */,
+				D5AC63B024E9641C00B2A7D5 /* Enrollment.swift in Sources */,
+				D5B9B1BE24F29CD400F94963 /* Smartcard.swift in Sources */,
+				D5CC091224B21FBA00186DE1 /* AppState.swift in Sources */,
+				D5AC63A824DEA8D800B2A7D5 /* AuthView.swift in Sources */,
+				D5CC091424B37C7300186DE1 /* SettingsView.swift in Sources */,
+				D5AC63AA24DFD2B100B2A7D5 /* Auth.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5CC08EF24B1FF5C00186DE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5CC08F824B1FF5C00186DE1 /* AcmeAuthTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5CC08FA24B1FF5C00186DE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5CC090324B1FF5C00186DE1 /* AcmeAuthUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D5CC08F524B1FF5C00186DE1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5CC08DC24B1FF5A00186DE1 /* AcmeAuth */;
+			targetProxy = D5CC08F424B1FF5C00186DE1 /* PBXContainerItemProxy */;
+		};
+		D5CC090024B1FF5C00186DE1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5CC08DC24B1FF5A00186DE1 /* AcmeAuth */;
+			targetProxy = D5CC08FF24B1FF5C00186DE1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D5CC08EB24B1FF5C00186DE1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5CC08EC24B1FF5C00186DE1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D5CC090524B1FF5C00186DE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D5CC090624B1FF5C00186DE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D5CC090824B1FF5C00186DE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AcmeAuth/AcmeAuth.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_ASSET_PATHS = "\"AcmeAuth/Preview Content\"";
+				DEVELOPMENT_TEAM = Z355VX7235;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = AcmeAuth/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.spilikin.AcmeAuth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D5CC090924B1FF5C00186DE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AcmeAuth/AcmeAuth.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_ASSET_PATHS = "\"AcmeAuth/Preview Content\"";
+				DEVELOPMENT_TEAM = Z355VX7235;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = AcmeAuth/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.spilikin.AcmeAuth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D5CC090B24B1FF5C00186DE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z355VX7235;
+				INFOPLIST_FILE = AcmeAuthTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.spilikin.AcmeAuthTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcmeAuth.app/AcmeAuth";
+			};
+			name = Debug;
+		};
+		D5CC090C24B1FF5C00186DE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z355VX7235;
+				INFOPLIST_FILE = AcmeAuthTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.spilikin.AcmeAuthTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcmeAuth.app/AcmeAuth";
+			};
+			name = Release;
+		};
+		D5CC090E24B1FF5C00186DE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z355VX7235;
+				INFOPLIST_FILE = AcmeAuthUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.spilikin.AcmeAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AcmeAuth;
+			};
+			name = Debug;
+		};
+		D5CC090F24B1FF5C00186DE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z355VX7235;
+				INFOPLIST_FILE = AcmeAuthUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.spilikin.AcmeAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AcmeAuth;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D5CC08D824B1FF5A00186DE1 /* Build configuration list for PBXProject "AcmeAuth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5CC090524B1FF5C00186DE1 /* Debug */,
+				D5CC090624B1FF5C00186DE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5CC090724B1FF5C00186DE1 /* Build configuration list for PBXNativeTarget "AcmeAuth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5CC090824B1FF5C00186DE1 /* Debug */,
+				D5CC090924B1FF5C00186DE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5CC090A24B1FF5C00186DE1 /* Build configuration list for PBXNativeTarget "AcmeAuthTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5CC090B24B1FF5C00186DE1 /* Debug */,
+				D5CC090C24B1FF5C00186DE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5CC090D24B1FF5C00186DE1 /* Build configuration list for PBXNativeTarget "AcmeAuthUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5CC090E24B1FF5C00186DE1 /* Debug */,
+				D5CC090F24B1FF5C00186DE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D540791B24EC428F00635053 /* XCRemoteSwiftPackageReference "JOSESwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airsidemobile/JOSESwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.1;
+			};
+		};
+		D59880A724F6D5B90087C57F /* XCRemoteSwiftPackageReference "ref-OpenHealthCardKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spilikin/ref-OpenHealthCardKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.10;
+			};
+		};
+		D59944CF24B4CD10001723C5 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D540791C24EC428F00635053 /* JOSESwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D540791B24EC428F00635053 /* XCRemoteSwiftPackageReference "JOSESwift" */;
+			productName = JOSESwift;
+		};
+		D59944D024B4CD10001723C5 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D59944CF24B4CD10001723C5 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D5CC08D524B1FF5A00186DE1 /* Project object */;
+}
