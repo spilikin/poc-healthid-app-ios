@@ -72,6 +72,15 @@
           "revision": "9ca1c54e261891daa79ef81c59332d0d2214bea9",
           "version": "2.0.10"
         }
+      },
+      {
+        "package": "VKPinCodeView",
+        "repositoryURL": "https://github.com/Sunspension/VKPinCodeView.git",
+        "state": {
+          "branch": null,
+          "revision": "9aace99b23a7812a38a46a921996c297fc82aeb4",
+          "version": "0.4.2"
+        }
       }
     ]
   },

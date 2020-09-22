@@ -10,6 +10,7 @@
 		D540791A24EC2BE500635053 /* EnrollmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540791924EC2BE500635053 /* EnrollmentView.swift */; };
 		D540791D24EC428F00635053 /* JOSESwift in Frameworks */ = {isa = PBXBuildFile; productRef = D540791C24EC428F00635053 /* JOSESwift */; };
 		D540791F24ED726000635053 /* KeyManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540791E24ED726000635053 /* KeyManagement.swift */; };
+		D560D4332509292000EB32E7 /* UITextField+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560D4322509292000EB32E7 /* UITextField+UIApplication.swift */; };
 		D59944D124B4CD10001723C5 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = D59944D024B4CD10001723C5 /* CodeScanner */; };
 		D5AC63A824DEA8D800B2A7D5 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63A724DEA8D800B2A7D5 /* AuthView.swift */; };
 		D5AC63AA24DFD2B100B2A7D5 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63A924DFD2B100B2A7D5 /* Auth.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		D540791924EC2BE500635053 /* EnrollmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentView.swift; sourceTree = "<group>"; };
 		D540791E24ED726000635053 /* KeyManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManagement.swift; sourceTree = "<group>"; };
+		D560D4322509292000EB32E7 /* UITextField+UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+UIApplication.swift"; sourceTree = "<group>"; };
 		D5AC63A724DEA8D800B2A7D5 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		D5AC63A924DFD2B100B2A7D5 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		D5AC63AD24DFF80600B2A7D5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				D5CC091624B3807300186DE1 /* ScannerView.swift */,
 				D5AC63A724DEA8D800B2A7D5 /* AuthView.swift */,
 				D540791924EC2BE500635053 /* EnrollmentView.swift */,
+				D560D4322509292000EB32E7 /* UITextField+UIApplication.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			files = (
 				D5CC08E124B1FF5A00186DE1 /* AppDelegate.swift in Sources */,
 				D540791F24ED726000635053 /* KeyManagement.swift in Sources */,
+				D560D4332509292000EB32E7 /* UITextField+UIApplication.swift in Sources */,
 				D5CC08E324B1FF5A00186DE1 /* SceneDelegate.swift in Sources */,
 				D5CC08E524B1FF5A00186DE1 /* HomeView.swift in Sources */,
 				D5CC091724B3807300186DE1 /* ScannerView.swift in Sources */,

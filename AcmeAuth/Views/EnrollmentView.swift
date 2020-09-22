@@ -5,6 +5,13 @@
 import SwiftUI
 import Combine
 
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
 struct EnrollmentView: View {
     let enrollmentManager = EnrollmentManager()
     @EnvironmentObject var appState: AppState
@@ -15,6 +22,9 @@ struct EnrollmentView: View {
     @State var can = "123123"
     @State var pin = ""
     @Environment(\.presentationMode) var presentationMode
+
+    func checkIfTextsMatch(changed: Bool) {
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -27,11 +37,23 @@ struct EnrollmentView: View {
             if (useSmartcard) {
                 VStack (alignment: .leading) {
                     Text("CAN")
-                    TextField("", text: $can)                .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.numberPad)
+                    TextField("", text: $can)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .font(.largeTitle)
+                        .keyboardType(.decimalPad)
                     Text("PIN")
-                    SecureField("", text: $pin)                .textFieldStyle(RoundedBorderTextFieldStyle())
-                        //.keyboardType(.numberPad)
+                    let pinBinding = Binding<String>(get: {
+                        self.pin
+                    }, set: {
+                        self.pin = $0
+                        if self.pin.count == 6 {
+                            self.hideKeyboard()
+                        }
+                    })
+                    SecureField("", text: pinBinding)                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .font(.largeTitle)
+                        .keyboardType(.numberPad)
+
 
                 }
                 .font(.title)
@@ -51,7 +73,7 @@ struct EnrollmentView: View {
     var enrollButton: some View {
         Button(action: {
 
-            let publisher = useSmartcard ?  enrollmentManager.enrollWithSmartcard(acct: appState.settings.acct, can: can, pin: pin) :            enrollmentManager.enroll(acct: appState.settings.acct)
+            let publisher = useSmartcard ?  enrollmentManager.enrollWithSmartcard(acct: appState.settings.acct, can: can.description, pin: pin) :            enrollmentManager.enroll(acct: appState.settings.acct)
             
             cancellable = publisher
                 .receive(on: DispatchQueue.main)
