@@ -16,6 +16,7 @@ struct ConnectorSettings {
 
 class AppSettings: ObservableObject {
     @Published var connector = ConnectorSettings()
+    @Published var authEndpoint = URL(string: "https://id.acme.spilikin.dev/auth/realms/healthid/protocol/openid-connect/auth")!
     @Published var apiBaseURL = URL(string: "https://appauth.acme.spilikin.dev/api/")!
     @Published var acct: String {
          didSet {

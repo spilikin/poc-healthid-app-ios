@@ -20,7 +20,7 @@ class AppState: ObservableObject {
     @Published var enrollmentSuccess = false
     
     init() {
-        //onOpenURL(URL(string: "https://appauth.acme.spilikin.dev/api/auth/challenge?acct=884874@healthid.life&redirect_uri=https://acme.spilikin.dev/Account/&remote_auth_uri=https://acme.spilikin.dev/SignIn/Authenticate")!)
+        //onOpenURL(URL(string: "https://id.acme.spilikin.dev/auth/realms/healthid/protocol/openid-connect/auth?response_type=code&client_id=aua.spilikin.dev&code_challenge_method=S256&code_challenge=leDpL-Rywd20NV_EgY31k_m4VcENQvAgDDKNJM9GeTE&redirect_uri=https%3A%2F%2Faua.spilikin.dev%2Flogin")!)
     }
     
     func accepts(url: URL?) -> Bool {
@@ -29,7 +29,7 @@ class AppState: ObservableObject {
             return false
         }
         
-        return AuthRequest(url) != nil
+        return (try? AuthRequest(url)) != nil
     }
     
     func onOpenURL(_ url: URL?) {
@@ -40,7 +40,7 @@ class AppState: ObservableObject {
         
         //debugLog = url.description + "\n" + debugLog
         
-        authRequest = AuthRequest(url)
+        try? authRequest = AuthRequest(url)
         if let _ = authRequest {
             isSpecialScreenState = true
             screenState = .authenticating

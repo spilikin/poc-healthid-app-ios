@@ -12,11 +12,15 @@
 		D540791F24ED726000635053 /* KeyManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540791E24ED726000635053 /* KeyManagement.swift */; };
 		D560D4332509292000EB32E7 /* UITextField+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560D4322509292000EB32E7 /* UITextField+UIApplication.swift */; };
 		D59944D124B4CD10001723C5 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = D59944D024B4CD10001723C5 /* CodeScanner */; };
+		D5A851C1261AF52000C64343 /* Keycloak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C6A32B2619FF5F00605470 /* Keycloak.swift */; };
 		D5AC63A824DEA8D800B2A7D5 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63A724DEA8D800B2A7D5 /* AuthView.swift */; };
 		D5AC63AA24DFD2B100B2A7D5 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63A924DFD2B100B2A7D5 /* Auth.swift */; };
 		D5AC63AE24DFF80600B2A7D5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63AD24DFF80600B2A7D5 /* Settings.swift */; };
 		D5AC63B024E9641C00B2A7D5 /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC63AF24E9641C00B2A7D5 /* Enrollment.swift */; };
 		D5B9B1BE24F29CD400F94963 /* Smartcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B9B1BD24F29CD400F94963 /* Smartcard.swift */; };
+		D5C6A31926184FE600605470 /* Federation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C6A31826184FE600605470 /* Federation.swift */; };
+		D5C6A31E2619BB2800605470 /* KeycloakAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C6A31D2619BB2800605470 /* KeycloakAuthTests.swift */; };
+		D5C6A3272619C8BA00605470 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D5C6A3262619C8BA00605470 /* SwiftSoup */; };
 		D5CC08E124B1FF5A00186DE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC08E024B1FF5A00186DE1 /* AppDelegate.swift */; };
 		D5CC08E324B1FF5A00186DE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC08E224B1FF5A00186DE1 /* SceneDelegate.swift */; };
 		D5CC08E524B1FF5A00186DE1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC08E424B1FF5A00186DE1 /* HomeView.swift */; };
@@ -56,6 +60,9 @@
 		D5AC63AD24DFF80600B2A7D5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D5AC63AF24E9641C00B2A7D5 /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
 		D5B9B1BD24F29CD400F94963 /* Smartcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Smartcard.swift; sourceTree = "<group>"; };
+		D5C6A31826184FE600605470 /* Federation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Federation.swift; sourceTree = "<group>"; };
+		D5C6A31D2619BB2800605470 /* KeycloakAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakAuthTests.swift; sourceTree = "<group>"; };
+		D5C6A32B2619FF5F00605470 /* Keycloak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycloak.swift; sourceTree = "<group>"; };
 		D5CC08DD24B1FF5A00186DE1 /* AcmeAuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcmeAuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5CC08E024B1FF5A00186DE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5CC08E224B1FF5A00186DE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +90,7 @@
 			files = (
 				D59944D124B4CD10001723C5 /* CodeScanner in Frameworks */,
 				D540791D24EC428F00635053 /* JOSESwift in Frameworks */,
+				D5C6A3272619C8BA00605470 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +120,7 @@
 				D5AC63AF24E9641C00B2A7D5 /* Enrollment.swift */,
 				D540791E24ED726000635053 /* KeyManagement.swift */,
 				D5B9B1BD24F29CD400F94963 /* Smartcard.swift */,
+				D5C6A31826184FE600605470 /* Federation.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -163,8 +172,10 @@
 		D5CC08F624B1FF5C00186DE1 /* AcmeAuthTests */ = {
 			isa = PBXGroup;
 			children = (
+				D5C6A32B2619FF5F00605470 /* Keycloak.swift */,
 				D5CC08F724B1FF5C00186DE1 /* AcmeAuthTests.swift */,
 				D5CC08F924B1FF5C00186DE1 /* Info.plist */,
+				D5C6A31D2619BB2800605470 /* KeycloakAuthTests.swift */,
 			);
 			path = AcmeAuthTests;
 			sourceTree = "<group>";
@@ -210,6 +221,7 @@
 			packageProductDependencies = (
 				D59944D024B4CD10001723C5 /* CodeScanner */,
 				D540791C24EC428F00635053 /* JOSESwift */,
+				D5C6A3262619C8BA00605470 /* SwiftSoup */,
 			);
 			productName = AcmeAuth;
 			productReference = D5CC08DD24B1FF5A00186DE1 /* AcmeAuth.app */;
@@ -287,6 +299,7 @@
 				D59944CF24B4CD10001723C5 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				D540791B24EC428F00635053 /* XCRemoteSwiftPackageReference "JOSESwift" */,
 				D59880A724F6D5B90087C57F /* XCRemoteSwiftPackageReference "ref-OpenHealthCardKit" */,
+				D5C6A3252619C8BA00605470 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = D5CC08DE24B1FF5A00186DE1 /* Products */;
 			projectDirPath = "";
@@ -335,6 +348,7 @@
 				D540791F24ED726000635053 /* KeyManagement.swift in Sources */,
 				D560D4332509292000EB32E7 /* UITextField+UIApplication.swift in Sources */,
 				D5CC08E324B1FF5A00186DE1 /* SceneDelegate.swift in Sources */,
+				D5C6A31926184FE600605470 /* Federation.swift in Sources */,
 				D5CC08E524B1FF5A00186DE1 /* HomeView.swift in Sources */,
 				D5CC091724B3807300186DE1 /* ScannerView.swift in Sources */,
 				D5AC63AE24DFF80600B2A7D5 /* Settings.swift in Sources */,
@@ -352,7 +366,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5C6A31E2619BB2800605470 /* KeycloakAuthTests.swift in Sources */,
 				D5CC08F824B1FF5C00186DE1 /* AcmeAuthTests.swift in Sources */,
+				D5A851C1261AF52000C64343 /* Keycloak.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -497,7 +513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -513,7 +529,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AcmeAuth/AcmeAuth.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"AcmeAuth/Preview Content\"";
 				DEVELOPMENT_TEAM = Z355VX7235;
 				ENABLE_PREVIEWS = YES;
@@ -536,7 +552,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AcmeAuth/AcmeAuth.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"AcmeAuth/Preview Content\"";
 				DEVELOPMENT_TEAM = Z355VX7235;
 				ENABLE_PREVIEWS = YES;
@@ -703,6 +719,14 @@
 				minimumVersion = 1.0.6;
 			};
 		};
+		D5C6A3252619C8BA00605470 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -715,6 +739,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D59944CF24B4CD10001723C5 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
+		};
+		D5C6A3262619C8BA00605470 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5C6A3252619C8BA00605470 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

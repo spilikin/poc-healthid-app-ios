@@ -6,23 +6,60 @@ import SwiftUI
 import Combine
 import AVFoundation
 
+class ImageLoader: ObservableObject {
+    var didChange = PassthroughSubject<Data, Never>()
+    var data = Data() {
+        didSet {
+            didChange.send(data)
+        }
+    }
+
+    init(_ urlString:String) {
+        guard let url = URL(string: urlString) else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.data = data
+            }
+        }
+        task.resume()
+    }
+}
+
 struct AuthView: View {
     @Binding var showSheetView: Bool
+    let authRequest: AuthRequest
+    @ObservedObject var imageLoader:ImageLoader
+    @State var clientIcon:UIImage = UIImage()
     @State private var showingErrorAlert = false
     @State private var errorMessage = ""
-    let authRequest: AuthRequest
     var authManager = AuthManager()
     @State var cancellable: AnyCancellable? = nil
-
-
+   
+    init(showSheetView: Binding<Bool>, authRequest: AuthRequest) {
+        self._showSheetView = showSheetView
+        self.authRequest = authRequest
+        self.imageLoader = ImageLoader(authRequest.clientMetadata?.iconUri ?? "https://acme.spilikin.dev/img/logo.28c1d21d.png")
+    }
+ 
+    
     var body: some View {
         NavigationView {
             VStack() {
                 Spacer()
                 Text("Authenticate:").font(.headline)
-                // TODO: fetch App Metadata/Federation Policy
-                Text("HealthID Profile App").font(.largeTitle).bold()
-                Text("(\(authRequest.redirectURI.host!))").font(.title).bold()
+                
+                Image(uiImage: clientIcon)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width:150, height:150)
+                    .cornerRadius(20)
+                    .onReceive(imageLoader.didChange) { data in
+                        self.clientIcon = UIImage(data: data) ?? UIImage()
+                    }
+                                
+                Text(authRequest.clientMetadata?.name ?? "Unknown").font(.largeTitle).bold()
+                Text("(\(authRequest.clientMetadata!.id))").font(.title).bold()
                 Spacer()
                 confirmButton
                 Spacer()
@@ -74,6 +111,7 @@ struct AuthView: View {
                         UIApplication.shared.open(url)
                     })
             } else {
+                /*
                 cancellable = authManager.remoteAuthenticate(self.authRequest)
                     .receive(on: DispatchQueue.main)
                     .sink(receiveCompletion: { completion in
@@ -88,6 +126,7 @@ struct AuthView: View {
                         notifySuccess()
                         showSheetView = false
                     })
+                */
 
             }
         }) {

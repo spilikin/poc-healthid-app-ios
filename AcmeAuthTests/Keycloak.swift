@@ -1,10 +1,9 @@
-// AcmeAuth/Auth.swift
+// AcmeAuth/Keycloak.swift
 // 
 
 
 import Foundation
 import Combine
-import JOSESwift
 import SwiftSoup
 
 struct PKCERequest {
@@ -23,94 +22,19 @@ struct KeycloakChallengeForm {
     let challenge: String
 }
 
-enum AuthError: Error {
-    case serverError
-    case clientError(reason: String)
-    case localSignatureError
-    case formParseError
-    case usernameSubmitError
-    case challengeSubmitError
+enum KeycloakError: Error {
+    case AuthRequestError(reason: String)
+    case FormParseError
+    case UsernameSubmitError
+    case ChallengeSubmitError
 }
 
-struct Challenge: Codable {
-    let acct: String
-    let nonce: String
-}
 
-struct SignedChallenge: Codable {
-    let acct: String
-    let nonce: String
-    let signed_nonce: String
-}
-
-struct AuthenticationCode: Decodable {
-    let code: String
-}
-
-enum AuthRequestError: Error {
-    case NoClientId
-    case NoRedirectUri
-}
-
-class AuthRequest {
-    let url: URL
-    let redirectURI: String
-    let codeChallenge: String
-    let isRemote: Bool = false
-    let acct: String = "user1"
-    let clientMetadata: ClientMetadata?
-    
-    static func param(from components: URLComponents?, withName: String) -> String? {
-        return components?.queryItems?.first(where: { $0.name.lowercased() == withName})?.value
-    }
-    
-    init?(_ url: URL) throws {
-        self.url = url
-        let comps = URLComponents(string: url.description)
-        
-        guard let clientId = AuthRequest.param(from: comps, withName: "client_id") else {
-            // client_id ist not specified - return with error
-            throw AuthRequestError.NoClientId
-        }
-        
-        self.clientMetadata = FederationQuery().clientMetadata(clientId)
-                
-        guard let redirectURI = AuthRequest.param(from: comps, withName: "redirect_uri") else {
-            throw AuthRequestError.NoRedirectUri
-        }
-                
-        self.redirectURI = redirectURI
-        
-        guard let codeChallenge = AuthRequest.param(from: comps, withName: "code_challenge") else {
-            throw AuthRequestError.NoRedirectUri
-        }
-                
-        self.codeChallenge = codeChallenge
-
-    }
-    
-}
-
-class AuthManager: NSObject, URLSessionTaskDelegate {
-    var settings = AppSettings()
-    var keyManager = KeyManager()
+@available(iOS 14.0, *)
+class KeycloakLoginSession: NSObject, URLSessionTaskDelegate {
     var username = "user1"
     var session: URLSession?
-
-    private func signChallenge(_ challenge: Challenge) throws -> SignedChallenge {
-        let keyPair = try keyManager.loadKey()
-        let header = JWSHeader(algorithm: .ES256)
-        let payload = Payload(try JSONEncoder().encode(["nonce": challenge.nonce]))
-        let signer = Signer(signingAlgorithm: .ES256, privateKey: keyPair.signingKey)!
-        let jws = try JWS(header: header, payload: payload, signer: signer)
-        let signedChallenge = SignedChallenge(
-            acct: challenge.acct,
-            nonce: challenge.nonce,
-            signed_nonce: jws.compactSerializedString
-        )
-        return signedChallenge
-    }
-
+    
     func parseErrorMessage(from data: Data) -> String {
         do {
             let doc: Document = try SwiftSoup.parse(String(decoding: data, as: UTF8.self))
@@ -124,7 +48,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
         do {
             return try SwiftSoup.parse(String(decoding: data, as: UTF8.self))
         } catch {
-            throw AuthError.formParseError
+            throw KeycloakError.FormParseError
         }
 
     }
@@ -147,15 +71,9 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
      3.1. keycloak send redirect to the client
      4. intercept the redirect in delegate
      */
-    func authenticate(_ authRequest: AuthRequest) -> AnyPublisher<URL, Error>  {
-        let pkceRequest = PKCERequest(
-            endpoint: settings.authEndpoint.description,
-            codeChallenge: authRequest.codeChallenge,
-            clientId: authRequest.clientMetadata!.id,
-            redirectUri: authRequest.redirectURI)
-        
+    func authenticate(request: PKCERequest) -> AnyPublisher<URL, Error>  {
         self.session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.current)
-        let step1 = requestCode(request: pkceRequest)
+        let step1 = requestCode(request: request)
         let step2 = submitUsername(previousStep: step1, username: "user1")
         let step3 = submitChallenge(previousStep: step2)
         return step3
@@ -182,18 +100,17 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
 
                 let httpResponse = output.response as! HTTPURLResponse;
                 if httpResponse.statusCode >= 400 {
-                    throw AuthError.clientError(reason: self.parseErrorMessage(from: output.data))
+                    throw KeycloakError.AuthRequestError(reason: self.parseErrorMessage(from: output.data))
                 }
                                 
                 do {
-                    // TODO: check for 302
                     let loginPage = try self.parseData(output.data)
                     let formElement = try loginPage?.getElementById("kc-form-login")
                     let formAction = try formElement?.attr("action")
                     let loginForm = KeycloakUsernameForm(action: URL(string: formAction!)!)
                     return loginForm
                 } catch {
-                    throw AuthError.formParseError
+                    throw KeycloakError.FormParseError
                 }
                 
             }.eraseToAnyPublisher()
@@ -209,7 +126,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
                 .mapError { $0 as Error}
                 .tryMap { output in
                     guard let response = output.response as? HTTPURLResponse, response.statusCode == 200 else {
-                        throw AuthError.usernameSubmitError
+                        throw KeycloakError.UsernameSubmitError
                     }
                     do {
                         let challengePage = try self.parseData(output.data)
@@ -218,7 +135,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
                         let challengeForm = KeycloakChallengeForm(action: URL(string: formAction!)!, challenge: "fake")
                         return challengeForm
                     } catch {
-                        throw AuthError.formParseError
+                        throw KeycloakError.FormParseError
                     }
                 }.eraseToAnyPublisher()
         }.eraseToAnyPublisher()
@@ -234,7 +151,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
                 .mapError { $0 as Error}
                 .tryMap { output in
                     guard let response = output.response as? HTTPURLResponse, response.statusCode == 302 else {
-                        throw AuthError.challengeSubmitError
+                        throw KeycloakError.ChallengeSubmitError
                     }
                     return URL(string: response.value(forHTTPHeaderField: "Location")!)!
                 }.eraseToAnyPublisher()
@@ -242,4 +159,3 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
     }
 
 }
-
