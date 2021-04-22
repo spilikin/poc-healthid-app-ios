@@ -189,8 +189,10 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
                     // TODO: check for 302
                     let loginPage = try self.parseData(output.data)
                     let formElement = try loginPage?.getElementById("kc-form-login")
-                    let formAction = try formElement?.attr("action")
-                    let loginForm = KeycloakUsernameForm(action: URL(string: formAction!)!)
+                    guard let formAction = try formElement?.attr("action") else {
+                        throw AuthError.formParseError
+                    }
+                    let loginForm = KeycloakUsernameForm(action: URL(string: formAction)!)
                     return loginForm
                 } catch {
                     throw AuthError.formParseError

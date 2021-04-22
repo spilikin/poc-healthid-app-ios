@@ -72,10 +72,10 @@ class KeycloakAuthTests: XCTestCase {
                 request.httpBody = "client_id=aua.spilikin.dev".data(using: .utf8)
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
                     guard error == nil && data != nil else {
-                        print(error)
+                        print(error.debugDescription)
                         return
                     }
-                    print(data)
+                    print(data!)
                     expectation.fulfill()
                 }
                 task.resume()
