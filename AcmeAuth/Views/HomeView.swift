@@ -13,6 +13,10 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .center) {
+                    IdentityView(model: IdentityViewModel(mockIdentity))
+
+                    /*
+
                     if (appState.settings.isEnrolled) {
                         if (appState.enrollmentSuccess) {
                             VStack(alignment: .center) {
@@ -33,8 +37,9 @@ struct HomeView: View {
                         enrollButton
                     }
                     debugView
+                    */
                 }
-                .navigationBarTitle(Text("Acme Companion"))
+                .navigationBarTitle(Text("Acme HealthID"))
                 .navigationBarItems(trailing: settingsButton)
                 .sheet(isPresented: $appState.isSpecialScreenState) {
                     sheetView()

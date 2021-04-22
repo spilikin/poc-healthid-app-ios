@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D526B9B02631A26E00386BEA /* IdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D526B9AF2631A26E00386BEA /* IdentityView.swift */; };
 		D540791A24EC2BE500635053 /* EnrollmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540791924EC2BE500635053 /* EnrollmentView.swift */; };
 		D540791D24EC428F00635053 /* JOSESwift in Frameworks */ = {isa = PBXBuildFile; productRef = D540791C24EC428F00635053 /* JOSESwift */; };
 		D540791F24ED726000635053 /* KeyManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D540791E24ED726000635053 /* KeyManagement.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D526B9AF2631A26E00386BEA /* IdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityView.swift; sourceTree = "<group>"; };
 		D540791924EC2BE500635053 /* EnrollmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentView.swift; sourceTree = "<group>"; };
 		D540791E24ED726000635053 /* KeyManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManagement.swift; sourceTree = "<group>"; };
 		D560D4322509292000EB32E7 /* UITextField+UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+UIApplication.swift"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				D5AC63A724DEA8D800B2A7D5 /* AuthView.swift */,
 				D540791924EC2BE500635053 /* EnrollmentView.swift */,
 				D560D4322509292000EB32E7 /* UITextField+UIApplication.swift */,
+				D526B9AF2631A26E00386BEA /* IdentityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			files = (
 				D5CC08E124B1FF5A00186DE1 /* AppDelegate.swift in Sources */,
 				D540791F24ED726000635053 /* KeyManagement.swift in Sources */,
+				D526B9B02631A26E00386BEA /* IdentityView.swift in Sources */,
 				D560D4332509292000EB32E7 /* UITextField+UIApplication.swift in Sources */,
 				D5CC08E324B1FF5A00186DE1 /* SceneDelegate.swift in Sources */,
 				D5C6A31926184FE600605470 /* Federation.swift in Sources */,
@@ -534,7 +538,7 @@
 				DEVELOPMENT_TEAM = Z355VX7235;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = AcmeAuth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -557,7 +561,7 @@
 				DEVELOPMENT_TEAM = Z355VX7235;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = AcmeAuth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

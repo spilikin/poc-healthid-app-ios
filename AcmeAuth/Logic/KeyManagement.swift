@@ -19,8 +19,7 @@ class KeyManager {
                 kSecAttrKeyClass as String: kSecAttrKeyClassPrivate,
                 kSecAttrApplicationTag as String: HealthIDKeyTag,
                 kSecReturnRef as String: true,
-                kSecUseOperationPrompt as String: "HealthID Credentials required",
-//                kSecUseAuthenticationContext as String: context,
+                kSecUseAuthenticationContext as String: "HealthID",
             ]
         }
     }

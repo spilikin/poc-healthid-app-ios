@@ -14,10 +14,6 @@ struct PKCERequest {
     let redirectUri: String
 }
 
-struct KeycloakUsernameForm {
-    let action: URL
-}
-
 struct KeycloakChallengeForm {
     let action: URL
     let challenge: String
@@ -66,6 +62,9 @@ class AuthRequest {
     
     init?(_ url: URL) throws {
         self.url = url
+
+        NSLog(url.absoluteString)
+
         let comps = URLComponents(string: url.description)
         
         guard let clientId = AuthRequest.param(from: comps, withName: "client_id") else {
@@ -140,12 +139,10 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
     
     /*
      1. set original code request to keycloak
-     1.1. keycloak returns username form
-     2. submit the username to the form's action URL using POST
-     2.1. keycloak returns challenge form (totp)
-     3. submit the (signed) challenge to challenge form's action URL using POST
-     3.1. keycloak send redirect to the client
-     4. intercept the redirect in delegate
+     1.1. keycloak returns challenge form (totp)
+     2. submit the (signed) challenge to challenge form's action URL using POST
+     2.1. keycloak send redirect to the client
+     3. intercept the redirect in delegate
      */
     func authenticate(_ authRequest: AuthRequest) -> AnyPublisher<URL, Error>  {
         let pkceRequest = PKCERequest(
@@ -156,12 +153,11 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
         
         self.session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.current)
         let step1 = requestCode(request: pkceRequest)
-        let step2 = submitUsername(previousStep: step1, username: "user1")
-        let step3 = submitChallenge(previousStep: step2)
-        return step3
+        let step2 = submitChallenge(previousStep: step1, username: "user1")
+        return step2
     }
     
-    func requestCode(request: PKCERequest) -> AnyPublisher<KeycloakUsernameForm, Error> {
+    func requestCode(request: PKCERequest) -> AnyPublisher<KeycloakChallengeForm, Error> {
         var comps = URLComponents(string: request.endpoint)!
         comps.queryItems = [
             URLQueryItem(name: "response_type", value: "code"),
@@ -176,7 +172,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
 
         return self.session!.dataTaskPublisher(for: comps.url!)
             .mapError { $0 as Error }
-            .tryMap { output -> KeycloakUsernameForm in
+            .tryMap { output -> KeycloakChallengeForm in
                 let task = self.session!.dataTask(with: URL(string: "http://aua.spilikin.dev/")!)
                 task.resume()
 
@@ -186,14 +182,11 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
                 }
                                 
                 do {
-                    // TODO: check for 302
-                    let loginPage = try self.parseData(output.data)
-                    let formElement = try loginPage?.getElementById("kc-form-login")
-                    guard let formAction = try formElement?.attr("action") else {
-                        throw AuthError.formParseError
-                    }
-                    let loginForm = KeycloakUsernameForm(action: URL(string: formAction)!)
-                    return loginForm
+                    let challengePage = try self.parseData(output.data)
+                    let formElement = try challengePage?.getElementById("kc-totp-login-form")
+                    let formAction = try formElement?.attr("action")
+                    let challengeForm = KeycloakChallengeForm(action: URL(string: formAction!)!, challenge: "fake")
+                    return challengeForm
                 } catch {
                     throw AuthError.formParseError
                 }
@@ -201,37 +194,12 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
             }.eraseToAnyPublisher()
     }
     
-    func submitUsername(previousStep: AnyPublisher<KeycloakUsernameForm, Error>, username: String) -> AnyPublisher<KeycloakChallengeForm, Error> {
-        return previousStep.flatMap { usernameForm -> AnyPublisher<KeycloakChallengeForm, Error> in
-            var request = URLRequest(url: usernameForm.action)
-            request.httpMethod = "POST"
-
-            request.httpBody = "username=\(username)".data(using: .utf8)
-            return self.session!.dataTaskPublisher(for: request)
-                .mapError { $0 as Error}
-                .tryMap { output in
-                    guard let response = output.response as? HTTPURLResponse, response.statusCode == 200 else {
-                        throw AuthError.usernameSubmitError
-                    }
-                    do {
-                        let challengePage = try self.parseData(output.data)
-                        let formElement = try challengePage?.getElementById("kc-totp-login-form")
-                        let formAction = try formElement?.attr("action")
-                        let challengeForm = KeycloakChallengeForm(action: URL(string: formAction!)!, challenge: "fake")
-                        return challengeForm
-                    } catch {
-                        throw AuthError.formParseError
-                    }
-                }.eraseToAnyPublisher()
-        }.eraseToAnyPublisher()
-    }
-
-    func submitChallenge(previousStep: AnyPublisher<KeycloakChallengeForm, Error>) -> AnyPublisher<URL, Error> {
+    func submitChallenge(previousStep: AnyPublisher<KeycloakChallengeForm, Error>, username: String) -> AnyPublisher<URL, Error> {
         return previousStep.flatMap { challengeForm -> AnyPublisher<URL, Error> in
             var request = URLRequest(url: challengeForm.action)
             request.httpMethod = "POST"
 
-            request.httpBody = "challenge_data=\(challengeForm.challenge)".data(using: .utf8)
+            request.httpBody = "challenge_data=\(challengeForm.challenge)&username=\(username)".data(using: .utf8)
             return self.session!.dataTaskPublisher(for: request)
                 .mapError { $0 as Error}
                 .tryMap { output in
