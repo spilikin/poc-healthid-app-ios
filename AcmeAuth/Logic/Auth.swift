@@ -29,8 +29,9 @@ class AuthRequest {
     let url: URL
     let redirectURI: String
     let codeChallenge: String
+    let codeChallengeMethod = "S256"
     let scope: String
-    let isRemote: Bool = false
+    let authnChallenge: String?
     let clientMetadata: ClientMetadata?
     var username = "user1"
     
@@ -67,9 +68,11 @@ class AuthRequest {
         guard let scope = AuthRequest.param(from: comps, withName: "scope") else {
             throw AuthRequestError.NoScope
         }
-                
+        
         self.scope = scope
         
+        self.authnChallenge = AuthRequest.param(from: comps, withName: "authn_challenge")
+
     }
     
 }
@@ -103,6 +106,23 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
                     completionHandler: @escaping (URLRequest?) -> Void) {
         // if error occured ahndle it and prevent redirect
         completionHandler(nil)
+    }
+    
+    func remoteAuthenticate(_ authRequest: AuthRequest) -> AnyPublisher<ChallengeResource, Error>  {
+        self.session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.current)
+        let step1 = requestChallenge(authRequest)
+        let step2 = replaceChallenge(previousStep: step1, authRequest: authRequest)
+        let step3 = submitChallengeResponse(previousStep: step2, authRequest: authRequest)
+        return step3
+    }
+    
+    func replaceChallenge(previousStep: AnyPublisher<ChallengeResource, Error>, authRequest: AuthRequest) -> AnyPublisher<ChallengeResource, Error> {
+        return previousStep.flatMap { challenge -> AnyPublisher<ChallengeResource, Error> in
+            return Future<ChallengeResource, Error> { promise in
+                let newChallenge = ChallengeResource(endpoint: challenge.endpoint, challenge: authRequest.authnChallenge!)
+                promise(.success(newChallenge))
+            }.eraseToAnyPublisher()
+        }.eraseToAnyPublisher()
     }
     
     func authenticate(_ authRequest: AuthRequest) -> AnyPublisher<URL, Error>  {
@@ -145,7 +165,6 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
     
     func submitChallengeResponse(previousStep: AnyPublisher<ChallengeResource, Error>, authRequest: AuthRequest) -> AnyPublisher<ChallengeResource, Error> {
         return previousStep.flatMap { challenge -> AnyPublisher<ChallengeResource, Error> in
-            NSLog(challenge.device_code!)
             var request = URLRequest(url: URL(string: challenge.endpoint)!)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Accept")

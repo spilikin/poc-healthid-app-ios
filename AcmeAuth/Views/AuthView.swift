@@ -94,8 +94,23 @@ struct AuthView: View {
         
     var confirmButton: some View {
         Button(action: {
-            if !authRequest.isRemote {
-                cancellable = authManager.authenticate(self.authRequest)
+            if let _ = authRequest.authnChallenge {
+                cancellable = authManager.remoteAuthenticate(authRequest)
+                    .receive(on: DispatchQueue.main)
+                    .sink(receiveCompletion: { completion in
+                        switch completion {
+                        case .finished:
+                            break
+                        case .failure(let error):
+                            errorMessage = error.localizedDescription
+                            showingErrorAlert = true
+                        }
+                    }, receiveValue: { _ in
+                        notifySuccess()
+                        showSheetView = false
+                    })
+            } else {
+                cancellable = authManager.authenticate(authRequest)
                     .receive(on: DispatchQueue.main)
                     .sink(receiveCompletion: { completion in
                         switch completion {
@@ -110,24 +125,6 @@ struct AuthView: View {
                         showSheetView = false
                         UIApplication.shared.open(url)
                     })
-            } else {
-                /*
-                cancellable = authManager.remoteAuthenticate(self.authRequest)
-                    .receive(on: DispatchQueue.main)
-                    .sink(receiveCompletion: { completion in
-                        switch completion {
-                        case .finished:
-                            break
-                        case .failure(let error):
-                            errorMessage = error.localizedDescription
-                            showingErrorAlert = true
-                        }
-                    }, receiveValue: { _ in
-                        notifySuccess()
-                        showSheetView = false
-                    })
-                */
-
             }
         }) {
             HStack(alignment: .center) {

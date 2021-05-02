@@ -231,7 +231,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "90DFCBBD-29EC-48A3-AEF0-F140FDBE6A2A"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AcmeAuth/Logic/Settings.swift"
@@ -269,8 +269,8 @@
             filePath = "AcmeAuth/Logic/Auth.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "init(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -333,8 +333,8 @@
             filePath = "AcmeAuth/Views/AuthView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "confirmButton"
             landmarkType = "24">
          </BreakpointContent>
@@ -349,25 +349,9 @@
             filePath = "AcmeAuth/Logic/Auth.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "requestChallenge(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FD0ADE57-F3F7-4624-AE94-4B5249DC0194"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AcmeAuth/Logic/Auth.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "authenticate(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -397,8 +381,8 @@
             filePath = "AcmeAuth/Logic/Auth.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "submitChallengeResponse(previousStep:authRequest:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -413,8 +397,8 @@
             filePath = "AcmeAuth/Logic/Auth.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "submitChallengeResponse(previousStep:authRequest:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -429,8 +413,8 @@
             filePath = "AcmeAuth/Logic/Auth.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "submitChallengeResponse(previousStep:authRequest:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -439,14 +423,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B47162DB-DF74-4DDE-B029-496FABF8ABF7"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AcmeAuth/Logic/Auth.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "finishAuthentication(previousStep:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -454,17 +438,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C94F65B0-CDFE-4D38-9B21-3A11E6705613"
+            uuid = "4B7CC694-F0F2-46BA-B913-5A4A982C14D5"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AcmeAuth/Logic/Auth.swift"
+            filePath = "AcmeAuth/Views/AuthView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "submitChallengeResponse(previousStep:authRequest:)"
-            landmarkType = "7">
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "confirmButton"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
