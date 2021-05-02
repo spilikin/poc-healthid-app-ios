@@ -94,25 +94,13 @@ struct IdentityView: View {
                                 .foregroundColor(.gray)
                         }
                     }
-                    Divider()
+                    Divider().padding(.bottom)
                 }
             }
             .padding()
         }
 
     }
-
-
-    var settingsButton: some View {
-
-        NavigationLink(destination: SettingsView()) {
-            Image(systemName: "gear")
-                .imageScale(.large)
-                .foregroundColor(.primary)
-        }.padding(3)
-
-    }
-
 
 }
 

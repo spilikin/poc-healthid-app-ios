@@ -5,56 +5,34 @@
 import Foundation
 import Combine
 import JOSESwift
-import SwiftSoup
-
-struct PKCERequest {
-    let endpoint: String
-    let codeChallenge: String
-    let clientId: String
-    let redirectUri: String
-}
-
-struct KeycloakChallengeForm {
-    let action: URL
-    let challenge: String
-}
 
 enum AuthError: Error {
-    case serverError
-    case clientError(reason: String)
     case localSignatureError
-    case formParseError
-    case usernameSubmitError
-    case challengeSubmitError
-}
-
-struct Challenge: Codable {
-    let acct: String
-    let nonce: String
-}
-
-struct SignedChallenge: Codable {
-    let acct: String
-    let nonce: String
-    let signed_nonce: String
-}
-
-struct AuthenticationCode: Decodable {
-    let code: String
+    case challengeResponseError
 }
 
 enum AuthRequestError: Error {
     case NoClientId
     case NoRedirectUri
+    case NoCodeChallenge
+    case NoScope
+}
+
+struct ChallengeResource: Codable {
+    var endpoint: String
+    var challenge: String?
+    var device_code: String?
+    var authenticated: Bool?
 }
 
 class AuthRequest {
     let url: URL
     let redirectURI: String
     let codeChallenge: String
+    let scope: String
     let isRemote: Bool = false
-    let acct: String = "user1"
     let clientMetadata: ClientMetadata?
+    var username = "user1"
     
     static func param(from components: URLComponents?, withName: String) -> String? {
         return components?.queryItems?.first(where: { $0.name.lowercased() == withName})?.value
@@ -81,11 +59,17 @@ class AuthRequest {
         self.redirectURI = redirectURI
         
         guard let codeChallenge = AuthRequest.param(from: comps, withName: "code_challenge") else {
-            throw AuthRequestError.NoRedirectUri
+            throw AuthRequestError.NoCodeChallenge
         }
                 
         self.codeChallenge = codeChallenge
 
+        guard let scope = AuthRequest.param(from: comps, withName: "scope") else {
+            throw AuthRequestError.NoScope
+        }
+                
+        self.scope = scope
+        
     }
     
 }
@@ -96,6 +80,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
     var username = "user1"
     var session: URLSession?
 
+    /*
     private func signChallenge(_ challenge: Challenge) throws -> SignedChallenge {
         let keyPair = try keyManager.loadKey()
         let header = JWSHeader(algorithm: .ES256)
@@ -109,25 +94,8 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
         )
         return signedChallenge
     }
-
-    func parseErrorMessage(from data: Data) -> String {
-        do {
-            let doc: Document = try SwiftSoup.parse(String(decoding: data, as: UTF8.self))
-            return try doc.getElementById("kc-error-message")?.text() ?? "Unknown Keycloak error"
-        } catch {
-            return "Unknown Keycloak error"
-        }
-    }
-    
-    func parseData(_ data: Data) throws -> Document? {
-        do {
-            return try SwiftSoup.parse(String(decoding: data, as: UTF8.self))
-        } catch {
-            throw AuthError.formParseError
-        }
-
-    }
-    
+     */
+        
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     willPerformHTTPRedirection response: HTTPURLResponse,
@@ -137,78 +105,80 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
         completionHandler(nil)
     }
     
-    /*
-     1. set original code request to keycloak
-     1.1. keycloak returns challenge form (totp)
-     2. submit the (signed) challenge to challenge form's action URL using POST
-     2.1. keycloak send redirect to the client
-     3. intercept the redirect in delegate
-     */
     func authenticate(_ authRequest: AuthRequest) -> AnyPublisher<URL, Error>  {
-        let pkceRequest = PKCERequest(
-            endpoint: settings.authEndpoint.description,
-            codeChallenge: authRequest.codeChallenge,
-            clientId: authRequest.clientMetadata!.id,
-            redirectUri: authRequest.redirectURI)
-        
         self.session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.current)
-        let step1 = requestCode(request: pkceRequest)
-        let step2 = submitChallenge(previousStep: step1, username: "user1")
-        return step2
+        let step1 = requestChallenge(authRequest)
+        let step2 = submitChallengeResponse(previousStep: step1, authRequest: authRequest)
+        let step3 = finishAuthentication(previousStep: step2)
+        return step3
     }
     
-    func requestCode(request: PKCERequest) -> AnyPublisher<KeycloakChallengeForm, Error> {
-        var comps = URLComponents(string: request.endpoint)!
+    func requestChallenge(_ authRequest: AuthRequest) -> AnyPublisher<ChallengeResource, Error> {
+        self.session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.current)
+        var comps = URLComponents(string: settings.authEndpoint.description)!
         comps.queryItems = [
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "client_id", value: request.clientId),
+            URLQueryItem(name: "client_id", value: authRequest.clientMetadata?.id),
             URLQueryItem(name: "code_challenge_method", value: "S256"),
+            URLQueryItem(name: "redirect_uri", value: authRequest.redirectURI),
+            URLQueryItem(name: "code_challenge", value: authRequest.codeChallenge),
+            URLQueryItem(name: "scope", value: authRequest.scope),
         ]
         
-        comps.queryItems?.append(URLQueryItem(name: "redirect_uri", value: request.redirectUri))
-        comps.queryItems?.append(URLQueryItem(name: "code_challenge", value: request.codeChallenge))
-
         NSLog("Performing the PKCE request to Keycloak: \(comps.url!.description)")
 
-        return self.session!.dataTaskPublisher(for: comps.url!)
-            .mapError { $0 as Error }
-            .tryMap { output -> KeycloakChallengeForm in
-                let task = self.session!.dataTask(with: URL(string: "http://aua.spilikin.dev/")!)
-                task.resume()
+        var request = URLRequest(url: comps.url!)
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-                let httpResponse = output.response as! HTTPURLResponse;
-                if httpResponse.statusCode >= 400 {
-                    throw AuthError.clientError(reason: self.parseErrorMessage(from: output.data))
-                }
-                                
-                do {
-                    let challengePage = try self.parseData(output.data)
-                    let formElement = try challengePage?.getElementById("kc-totp-login-form")
-                    let formAction = try formElement?.attr("action")
-                    let challengeForm = KeycloakChallengeForm(action: URL(string: formAction!)!, challenge: "fake")
-                    return challengeForm
-                } catch {
-                    throw AuthError.formParseError
-                }
-                
-            }.eraseToAnyPublisher()
+        return self.session!.dataTaskPublisher(for: request)
+            .mapError { $0 as Error }
+            .tryMap() { output -> Data in
+                guard let httpResponse = output.response as? HTTPURLResponse,
+                    httpResponse.statusCode == 200 else {
+                    throw AuthError.challengeResponseError
+                    }
+                return output.data
+            }
+            .decode(type: ChallengeResource.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
     
-    func submitChallenge(previousStep: AnyPublisher<KeycloakChallengeForm, Error>, username: String) -> AnyPublisher<URL, Error> {
-        return previousStep.flatMap { challengeForm -> AnyPublisher<URL, Error> in
-            var request = URLRequest(url: challengeForm.action)
+    func submitChallengeResponse(previousStep: AnyPublisher<ChallengeResource, Error>, authRequest: AuthRequest) -> AnyPublisher<ChallengeResource, Error> {
+        return previousStep.flatMap { challenge -> AnyPublisher<ChallengeResource, Error> in
+            var request = URLRequest(url: URL(string: challenge.endpoint)!)
             request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-            request.httpBody = "challenge_data=\(challengeForm.challenge)&username=\(username)".data(using: .utf8)
+            request.httpBody = "command=challenge_response&signature=\(challenge.challenge!)&username=\(authRequest.username)".data(using: .utf8)
             return self.session!.dataTaskPublisher(for: request)
-                .mapError { $0 as Error}
+                .mapError { $0 as Error }
+                .tryMap { output in
+                    if let response = output.response as? HTTPURLResponse, response.statusCode != 200 {
+                        throw AuthError.challengeResponseError
+                    }
+                    var newChallenge = try JSONDecoder().decode(ChallengeResource.self, from: output.data)
+                    newChallenge.device_code = challenge.device_code
+                    return challenge
+                }.eraseToAnyPublisher()
+        }.eraseToAnyPublisher()
+    }
+    
+    func finishAuthentication(previousStep: AnyPublisher<ChallengeResource, Error>) -> AnyPublisher<URL, Error> {
+        return previousStep.flatMap { challenge -> AnyPublisher<URL, Error> in
+            var request = URLRequest(url: URL(string: challenge.endpoint)!)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            request.httpBody = "command=finish&device_code=\(challenge.device_code!)".data(using: .utf8)
+            return self.session!.dataTaskPublisher(for: request)
+                .mapError { $0 as Error }
                 .tryMap { output in
                     guard let response = output.response as? HTTPURLResponse, response.statusCode == 302 else {
-                        throw AuthError.challengeSubmitError
+                        throw AuthError.challengeResponseError
                     }
                     return URL(string: response.value(forHTTPHeaderField: "Location")!)!
                 }.eraseToAnyPublisher()
         }.eraseToAnyPublisher()
+
     }
 
 }

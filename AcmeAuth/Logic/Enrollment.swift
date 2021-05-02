@@ -60,6 +60,7 @@ class EnrollmentManager {
     
     private func signEnrollmentRequestWithEnclave(_ enrollmentRequest: EnrollmentRequest) throws -> SignedEnrollmentRequest {
         let context = LAContext()
+        context.localizedReason = "Authenticate using HealthID"
         
         #if !targetEnvironment(simulator)
         var error: NSError?

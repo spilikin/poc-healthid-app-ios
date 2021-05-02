@@ -3,7 +3,23 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "AuthManager.requestCode(_:):Auth.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "comps.url!.description">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in KeycloakLoginSession.submitChallenge(previousStep:):Keycloak.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.value(forHTTPHeaderField: &quot;Location&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in AuthManager.finishAuthentication(previousStep:):Auth.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.value(forHTTPHeaderField: &quot;Location&quot;)">

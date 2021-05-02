@@ -2,18 +2,21 @@ import SwiftUI
 import Combine
 
 struct HomeView: View {
+    @Environment(\.openURL) var openURL
     @EnvironmentObject var appState: AppState
     @State var cancellable: AnyCancellable? = nil
-
-    func debug(_ text: String) {
-        self.appState.debugLog = text + "\n" + self.appState.debugLog
-    }
     
     @ViewBuilder var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .center) {
-                    IdentityView(model: IdentityViewModel(mockIdentity))
+                    if (appState.settings.isEnrolled) {
+                        advertisement
+                        IdentityView(model: IdentityViewModel(mockIdentity))
+                    } else {
+                        enrollButton
+                    }
+
 
                     /*
 
@@ -39,8 +42,8 @@ struct HomeView: View {
                     debugView
                     */
                 }
-                .navigationBarTitle(Text("Acme HealthID"))
-                .navigationBarItems(trailing: settingsButton)
+                .navigationBarTitle(Text("HealthID"))
+                .navigationBarItems(leading: scannerButton, trailing: settingsButton)
                 .sheet(isPresented: $appState.isSpecialScreenState) {
                     sheetView()
                 }
@@ -91,13 +94,28 @@ struct HomeView: View {
 
     }
 
-    var debugView: some View {
-        Text(self.appState.debugLog)
-            .font(Font.system(.footnote, design: .monospaced))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-    }
+    var advertisement: some View {
+        Button(action: {
+            openURL(URL(string: "https://aua.spilikin.dev")!)
+        }) {
+            HStack(alignment: .center) {
+                Image("pain")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 65, height: 65)
 
+                Text("Got pain? Try Aua.app!")
+                Spacer()
+                Image(systemName: "chevron.right")
+            }.padding()
+                .foregroundColor(.white)
+                .background(Color(red: 250 / 255, green: 210 / 255, blue: 77 / 255))
+                .cornerRadius(15)
+        }
+        .padding()
+
+    }
+    
     var accountButton: some View {
         VStack(alignment: .leading) {
             Text("HealtID Account:")
@@ -152,31 +170,17 @@ Enroll your identity at the Identity Provider and register this device as an aut
     }
 
     var scannerButton: some View {
-        VStack(alignment: .leading) {
-            Text("""
-Using this feature you can scan the QR code on a website to perform a remote login.
-""")
+        
+        Button(action: {
+            appState.screenState = .scanning
+            appState.isSpecialScreenState.toggle()
+        }) {
+            // "person.crop.circle"
+            Image(systemName: "qrcode.viewfinder")
+                .imageScale(.large)
                 .padding()
-                .lineLimit(3)
-            Button(action: {
-                appState.screenState = .scanning
-                appState.isSpecialScreenState.toggle()
-            }) {
-                HStack(alignment: .center) {
-                    Image(systemName: "qrcode.viewfinder")
-                        .font(.largeTitle)
-                        .foregroundColor(.white)
-                    Text("Scan Login Code")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                }
-                .padding()
-            }
         }
-        .foregroundColor(.white)
-        .background(Color.accentColor)
-        .cornerRadius(20)
-        .padding()
+
     }
     
     var settingsButton: some View {
