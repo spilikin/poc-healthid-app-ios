@@ -114,7 +114,6 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
     }
     
     func requestChallenge(_ authRequest: AuthRequest) -> AnyPublisher<ChallengeResource, Error> {
-        self.session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.current)
         var comps = URLComponents(string: settings.authEndpoint.description)!
         comps.queryItems = [
             URLQueryItem(name: "response_type", value: "code"),
@@ -137,6 +136,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
                     httpResponse.statusCode == 200 else {
                     throw AuthError.challengeResponseError
                     }
+                NSLog("Got challenge response")
                 return output.data
             }
             .decode(type: ChallengeResource.self, decoder: JSONDecoder())
@@ -145,6 +145,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
     
     func submitChallengeResponse(previousStep: AnyPublisher<ChallengeResource, Error>, authRequest: AuthRequest) -> AnyPublisher<ChallengeResource, Error> {
         return previousStep.flatMap { challenge -> AnyPublisher<ChallengeResource, Error> in
+            NSLog(challenge.device_code!)
             var request = URLRequest(url: URL(string: challenge.endpoint)!)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -158,7 +159,8 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
                     }
                     var newChallenge = try JSONDecoder().decode(ChallengeResource.self, from: output.data)
                     newChallenge.device_code = challenge.device_code
-                    return challenge
+                    NSLog("Submitted the challenge response and got answer: authenticated=\(newChallenge.authenticated ?? false)")
+                    return newChallenge
                 }.eraseToAnyPublisher()
         }.eraseToAnyPublisher()
     }
