@@ -83,22 +83,15 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
     var username = "user1"
     var session: URLSession?
 
-    /*
-    private func signChallenge(_ challenge: Challenge) throws -> SignedChallenge {
+    private func signChallenge(_ challenge: ChallengeResource) throws -> JWS {
         let keyPair = try keyManager.loadKey()
         let header = JWSHeader(algorithm: .ES256)
-        let payload = Payload(try JSONEncoder().encode(["nonce": challenge.nonce]))
+        let payload = Payload(try JSONEncoder().encode(["nonce": challenge.challenge]))
         let signer = Signer(signingAlgorithm: .ES256, privateKey: keyPair.signingKey)!
         let jws = try JWS(header: header, payload: payload, signer: signer)
-        let signedChallenge = SignedChallenge(
-            acct: challenge.acct,
-            nonce: challenge.nonce,
-            signed_nonce: jws.compactSerializedString
-        )
-        return signedChallenge
+        return jws
     }
-     */
-        
+
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     willPerformHTTPRedirection response: HTTPURLResponse,
@@ -165,6 +158,7 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
     
     func submitChallengeResponse(previousStep: AnyPublisher<ChallengeResource, Error>, authRequest: AuthRequest) -> AnyPublisher<ChallengeResource, Error> {
         return previousStep.flatMap { challenge -> AnyPublisher<ChallengeResource, Error> in
+
             var request = URLRequest(url: URL(string: challenge.endpoint)!)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -173,11 +167,13 @@ class AuthManager: NSObject, URLSessionTaskDelegate {
             return self.session!.dataTaskPublisher(for: request)
                 .mapError { $0 as Error }
                 .tryMap { output in
+
                     if let response = output.response as? HTTPURLResponse, response.statusCode != 200 {
                         throw AuthError.challengeResponseError
                     }
                     var newChallenge = try JSONDecoder().decode(ChallengeResource.self, from: output.data)
                     newChallenge.device_code = challenge.device_code
+                    let _ = try self.signChallenge(newChallenge)
                     NSLog("Submitted the challenge response and got answer: authenticated=\(newChallenge.authenticated ?? false)")
                     return newChallenge
                 }.eraseToAnyPublisher()

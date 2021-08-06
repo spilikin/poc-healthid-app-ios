@@ -50,7 +50,8 @@ struct EnrollmentView: View {
                             self.hideKeyboard()
                         }
                     })
-                    SecureField("", text: pinBinding)                .textFieldStyle(RoundedBorderTextFieldStyle())
+                    SecureField("", text: pinBinding)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                         .font(.largeTitle)
                         .keyboardType(.numberPad)
 
@@ -109,6 +110,8 @@ struct EnrollmentView: View {
         .background(Color.accentColor)
         .cornerRadius(15)
         .padding()
+        // disable smartcard enrollment
+        .disabled(useSmartcard)
     }
     
     var errorAlert: Alert {
